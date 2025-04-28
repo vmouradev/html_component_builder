@@ -1,0 +1,71 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+body {
+  font-family: 'Poppins', sans-serif;
+}
+
+.components-list-item {
+  transition: all 0.2s ease;
+}
+
+.components-list-item:hover {
+  transform: translateY(-2px);
+}
+
+.preview-component {
+  transition: all 0.2s ease;
+  position: relative;
+}
+
+.preview-component:hover {
+  outline: 2px dashed #3b82f6;
+}
+
+.preview-component:hover .component-actions {
+  opacity: 1;
+}
+
+.component-actions {
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.btn-icon svg {
+  width: 1.2rem;
+  height: 1.2rem;
+}
+
+.code-view {
+  font-family: 'Courier New', monospace;
+  tab-size: 2;
+}
+
+/* Animation for adding components */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.fade-in {
+  animation: fadeIn 0.3s ease forwards;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #c1c1c1;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #a1a1a1;
+}
