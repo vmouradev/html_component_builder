@@ -93,7 +93,7 @@ const defaultComponents: ComponentData[] = [
     content: {
       text: 'Folha a partir de 2025',
       icon: 'FileInvoiceDollar',
-      url: 'https://www.exemplo.com/folha-2025',
+      url: '/folha-2025',
       title: 'FOLHA DE PAGAMENTO A PARTIR DE 2025',
       backgroundColor: '#0d6efd',
     },
@@ -104,7 +104,7 @@ const defaultComponents: ComponentData[] = [
     content: {
       text: 'Folha anteriores a 2025',
       icon: 'FileInvoice',
-      url: 'https://www.exemplo.com/folha-anteriores',
+      url: '/folha-anteriores',
       title: 'FOLHA ANTERIORES A 2025',
       backgroundColor: '#0d6efd',
     },
@@ -385,9 +385,57 @@ export const EditorProvider: React.FC<{ children: ReactNode }> = ({ children }) 
         
         if (buttonElement && textElement) {
           const iconClass = iconElement?.className || '';
-          const iconName = iconClass.replace('fas fa-', '').split('-').map(
-            word => word.charAt(0).toUpperCase() + word.slice(1)
-          ).join('');
+          // Extrair o nome do ícone removendo 'fas fa-' e mapeando para o formato correto
+          let iconName = '';
+          
+          // Mapeamento de nomes específicos que precisam de tratamento especial
+          const iconMappings: {[key: string]: string} = {
+            'graduation-cap': 'GraduationCap',
+            'circle-dollar-sign': 'CircleDollarSign',
+            'file-invoice-dollar': 'FileInvoiceDollar',
+            'file-invoice': 'FileInvoice',
+            'user-graduate': 'UserGraduate',
+            'clipboard-list': 'ClipboardList',
+            'pen-tool': 'Tool',
+            'shopping-bag': 'Shopping',
+            'bar-chart': 'Chart',
+            'flask-conical': 'Flask',
+            'help-circle': 'Help',
+            'message-circle': 'Message',
+            'lightbulb': 'Lightbulb',
+            'file-pie-chart': 'FileChart',
+            'file-bar-chart': 'FileBarChart',
+            'user-square-2': 'UserSquare2',
+            'file-clock': 'FileClock',
+            'library-big': 'LibraryBig',
+            'file-stack': 'FileStack',
+            'file-archive': 'FileArchive',
+            'file-output': 'FileOutput',
+            'file-warning': 'FileWarning',
+            'file-question': 'FileQuestion',
+            'book-open': 'BookOpen',
+            'hard-hat': 'HardHat',
+            'file-spreadsheet': 'FileSpreadsheet',
+            'file-signature': 'FileSignature',
+            'user-cog': 'UserCog',
+            'file-box': 'FileBox',
+            'badge-help': 'BadgeHelp',
+            'file-key': 'FileKey',
+            'scroll-text': 'ScrollText'
+          };
+          
+          // Extrair o nome do ícone sem o prefixo 'fas fa-'
+          const rawIconName = iconClass.replace('fas fa-', '');
+          
+          // Verificar se o ícone está no mapeamento especial
+          if (iconMappings[rawIconName]) {
+            iconName = iconMappings[rawIconName];
+          } else {
+            // Caso contrário, converter usando o método padrão
+            iconName = rawIconName.split('-').map(
+              word => word.charAt(0).toUpperCase() + word.slice(1)
+            ).join('');
+          }
 
           newComponents.push({
             id: uuidv4(),

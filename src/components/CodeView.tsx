@@ -50,7 +50,53 @@ const CodeView: React.FC = () => {
           html += '    <!-- ' + buttonData.title + ' -->\n';
           html += '    <div class="accordion-item col-lg-4 mt-2">\n';
           html += `      <a href="${buttonData.url}" class="modern-btn" title="${buttonData.title}">\n`;
-          html += `        <span class="btn-icon"><i class="fas fa-${buttonData.icon.toLowerCase()}"></i></span>\n`;
+          // Converter o nome do ícone de camelCase para kebab-case
+          const iconMappings: {[key: string]: string} = {
+            'GraduationCap': 'graduation-cap',
+            'CircleDollarSign': 'circle-dollar-sign',
+            'FileInvoiceDollar': 'file-invoice-dollar',
+            'FileInvoice': 'file-invoice',
+            'UserGraduate': 'user-graduate',
+            'ClipboardList': 'clipboard-list',
+            'Tool': 'pen-tool',
+            'Shopping': 'shopping-bag',
+            'Chart': 'bar-chart',
+            'Flask': 'flask-conical',
+            'Help': 'help-circle',
+            'Message': 'message-circle',
+            'Lightbulb': 'lightbulb',
+            'FileChart': 'file-pie-chart',
+            'FileBarChart': 'file-bar-chart',
+            'UserSquare2': 'user-square-2',
+            'FileClock': 'file-clock',
+            'LibraryBig': 'library-big',
+            'FileStack': 'file-stack',
+            'FileArchive': 'file-archive',
+            'FileOutput': 'file-output',
+            'FileWarning': 'file-warning',
+            'FileQuestion': 'file-question',
+            'BookOpen': 'book-open',
+            'HardHat': 'hard-hat',
+            'FileSpreadsheet': 'file-spreadsheet',
+            'FileSignature': 'file-signature',
+            'UserCog': 'user-cog',
+            'FileBox': 'file-box',
+            'BadgeHelp': 'badge-help',
+            'FileKey': 'file-key',
+            'ScrollText': 'scroll-text',
+            'MousePointer': 'mouse-pointer'
+          };
+          
+          // Verificar se o ícone está no mapeamento especial
+          let iconName = '';
+          if (iconMappings[buttonData.icon]) {
+            iconName = iconMappings[buttonData.icon];
+          } else {
+            // Caso contrário, converter usando regex para transformar camelCase em kebab-case
+            iconName = buttonData.icon.replace(/([a-z0-9])([A-Z])/g, '$1-$2').toLowerCase();
+          }
+          
+          html += `        <span class="btn-icon"><i class="fas fa-${iconName}"></i></span>\n`;
           html += `        <span class="btn-text">${buttonData.text}</span>\n`;
           html += '      </a>\n';
           html += '    </div>\n\n';
